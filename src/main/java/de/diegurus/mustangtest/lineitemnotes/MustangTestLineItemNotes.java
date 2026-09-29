@@ -23,13 +23,17 @@ import org.mustangproject.ZUGFeRD.ZUGFeRD2PullProvider;
  */
 public class MustangTestLineItemNotes {
 
+    //
+    // Tested with 
+    // * NetBeans IDE 27 / JDK 17 / MustangLib 2.26.0 - o.k.
+    //
     public static void main(String[] args) {
         Invoice inv = new Invoice()
-                .setNumber("RE2026-09-0001")
+                .setNumber("TestRE-2026-09-0001")
                 .setIssueDate(new Date())
                 .setDeliveryDate(new Date())
-                .setSender(new TradeParty("Dienstleister", "Bahnstr. 1", "65205", "Wiesbaden", "DE"))
-                .setRecipient(new TradeParty("Musterkunde", "Musterweg 9", "99001", "Musterstadt", "DE"));
+                .setSender(new TradeParty("diegurus - zurawski zurawski poppl rohland GbR", "Juister Str. 3", "65199", "Wiesbaden", "DE"))
+                .setRecipient(new TradeParty("Musterkunde", "Musterweg 9", "99900", "Musterstadt", "DE"));
 
         List<IncludedNote> headerNotes = Arrays.asList(
                 // Add free text company data
@@ -42,22 +46,24 @@ public class MustangTestLineItemNotes {
         inv.setNotesWithSubjectCode(headerNotes);
 
         Item item = new Item()
-                .setProduct(new Product("Elektronen schubsen", "Elektronen schubsen", "HUR", BigDecimal.valueOf(20.0)))
-                .setPrice(BigDecimal.valueOf(95.0))
+                .setProduct(new Product("Datenbank Design", "DB Design - MS SQL 2026", "HUR", BigDecimal.valueOf(20.0)))
+                .setPrice(BigDecimal.valueOf(125.0))
                 .setQuantity(BigDecimal.valueOf(8.0));
-        item.addNote("Total gute Beratung nur bei uns!");
+        item.addNote("DB Design nach Vorgabe des Kunden inkl.");
         inv.addItem(item);
 
         item = new Item()
-                .setProduct(new Product("Irgendwas mit Zuhören", "Irgendwas mit Zuhören", "HUR", BigDecimal.valueOf(20.0)))
-                .setPrice(BigDecimal.valueOf(120.0))
-                .setQuantity(BigDecimal.valueOf(1.0));
+                .setProduct(new Product("Dokumentation", "Erstellen einer Kurzdokumentation für die ausgeführten Tätigkeiten", "HUR", BigDecimal.valueOf(20.0)))
+                .setPrice(BigDecimal.valueOf(95.0))
+                .setQuantity(BigDecimal.valueOf(2.5));
         List<IncludedNote> lineItemNotes = Arrays.asList(
                 new IncludedNote("AAB-CONTENT-LINE", SubjectCode.AAB),
-                new IncludedNote("AAI-CONTENT-LINE", SubjectCode.AAI)
+                new IncludedNote("AAB-CONTENT-LINE#2", SubjectCode.AAB),
+                new IncludedNote("AAI-CONTENT-LINE", SubjectCode.AAI),
+                new IncludedNote("SUR-CONTENT-LINE", SubjectCode.SUR)
         );
         item.addNotes(lineItemNotes);
-        item.addNote("Wir hören ungern zu!!!");
+        item.addNote("CONTENT-LINE-NO-SUBJECTCODE");
         inv.addItem(item);
 
         String theProfile = "EXTENDED"; // EN16931
