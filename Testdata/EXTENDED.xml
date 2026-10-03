@@ -51,6 +51,10 @@
         <ram:Description>DB Design - MS SQL 2026</ram:Description>
       </ram:SpecifiedTradeProduct>
       <ram:SpecifiedLineTradeAgreement>
+        <ram:BuyerOrderReferencedDocument>
+          <ram:IssuerAssignedID>EDI-2026-000069</ram:IssuerAssignedID>
+          <ram:LineID>2</ram:LineID>
+        </ram:BuyerOrderReferencedDocument>
         <ram:NetPriceProductTradePrice>
           <ram:ChargeAmount>125.0000</ram:ChargeAmount>
           <ram:BasisQuantity unitCode="HUR">1.0000</ram:BasisQuantity>
@@ -98,6 +102,10 @@
         <ram:Description>Erstellen einer Kurzdokumentation f�r die ausgef�hrten T�tigkeiten.</ram:Description>
       </ram:SpecifiedTradeProduct>
       <ram:SpecifiedLineTradeAgreement>
+        <ram:BuyerOrderReferencedDocument>
+          <ram:IssuerAssignedID>EDI-2026-000069</ram:IssuerAssignedID>
+          <ram:LineID>2</ram:LineID>
+        </ram:BuyerOrderReferencedDocument>
         <ram:NetPriceProductTradePrice>
           <ram:ChargeAmount>95.0000</ram:ChargeAmount>
           <ram:BasisQuantity unitCode="HUR">1.0000</ram:BasisQuantity>

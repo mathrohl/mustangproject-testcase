@@ -15,6 +15,7 @@ import org.mustangproject.IncludedNote;
 import org.mustangproject.Invoice;
 import org.mustangproject.Item;
 import org.mustangproject.Product;
+import org.mustangproject.ReferencedDocument;
 import org.mustangproject.SubjectCode;
 import org.mustangproject.TradeParty;
 import org.mustangproject.ZUGFeRD.Profiles;
@@ -35,6 +36,8 @@ public class MustangTestLineItemNotes {
     //   SubjectCode(s)
     //
     public static void main(String[] args) throws ParseException {
+        String custOrderDocNumber = "EDI-2026-000069";
+        ReferencedDocument refDocCustOrder = new ReferencedDocument();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
         Invoice inv = new Invoice()
@@ -63,13 +66,18 @@ public class MustangTestLineItemNotes {
                 .setPrice(BigDecimal.valueOf(125.0))
                 .setQuantity(BigDecimal.valueOf(8.0));
         item.addNote("DB Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.");
+        refDocCustOrder.setIssuerAssignedID(custOrderDocNumber)
+                .setLineID("1");
+        item.setBuyerOrderReferencedDocument(refDocCustOrder);
         inv.addItem(item);
 
         item = new Item()
                 .setProduct(new Product("Dokumentation", "Erstellen einer Kurzdokumentation für die ausgeführten Tätigkeiten.", "HUR", BigDecimal.valueOf(20.0)))
                 .setPrice(BigDecimal.valueOf(95.0))
                 .setQuantity(BigDecimal.valueOf(2.5));
-
+        refDocCustOrder.setIssuerAssignedID(custOrderDocNumber)
+                .setLineID("2");
+        item.setBuyerOrderReferencedDocument(refDocCustOrder);
         //
         // Charge reason code (UNCL7161)
         // Source: https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7161/
