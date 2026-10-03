@@ -54,6 +54,7 @@
         <ram:BuyerOrderReferencedDocument>
           <ram:IssuerAssignedID>EDI-2026-000069</ram:IssuerAssignedID>
           <ram:LineID>2</ram:LineID>
+          <ram:ReferenceTypeCode>105</ram:ReferenceTypeCode>
         </ram:BuyerOrderReferencedDocument>
         <ram:NetPriceProductTradePrice>
           <ram:ChargeAmount>125.0000</ram:ChargeAmount>
@@ -105,6 +106,7 @@
         <ram:BuyerOrderReferencedDocument>
           <ram:IssuerAssignedID>EDI-2026-000069</ram:IssuerAssignedID>
           <ram:LineID>2</ram:LineID>
+          <ram:ReferenceTypeCode>105</ram:ReferenceTypeCode>
         </ram:BuyerOrderReferencedDocument>
         <ram:NetPriceProductTradePrice>
           <ram:ChargeAmount>95.0000</ram:ChargeAmount>
