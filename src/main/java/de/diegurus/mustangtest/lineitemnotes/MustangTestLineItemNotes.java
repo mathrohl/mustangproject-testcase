@@ -5,9 +5,12 @@ package de.diegurus.mustangtest.lineitemnotes;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import org.mustangproject.Charge;
 import org.mustangproject.IncludedNote;
 import org.mustangproject.Invoice;
 import org.mustangproject.Item;
@@ -31,13 +34,19 @@ public class MustangTestLineItemNotes {
     //   the MustangLib 2.24.0 does not include the line item notes with
     //   SubjectCode(s)
     //
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+
         Invoice inv = new Invoice()
                 .setNumber("TestRE-2026-09-0001")
                 .setIssueDate(new Date())
-                .setDeliveryDate(new Date())
-                .setSender(new TradeParty("diegurus - zurawski zurawski poppl rohland GbR", "Juister Str. 3", "65199", "Wiesbaden", "DE"))
-                .setRecipient(new TradeParty("Musterkunde", "Musterweg 9", "99900", "Musterstadt", "DE"));
+                .setDeliveryDate(new Date());
+        Date invoicDueDate = dateFormat.parse("20991231");
+        inv.setDueDate(invoicDueDate);
+        inv.setSender(new TradeParty("diegurus - zurawski zurawski poppl rohland GbR", "Juister Str. 3", "65199", "Wiesbaden", "DE")
+                .addVATID("DE318445037"));
+        inv.setRecipient(new TradeParty("Musterkunde", "Musterweg 9", "99900", "Musterstadt", "DE")
+                .addVATID("DE772689730"));
 
         List<IncludedNote> headerNotes = Arrays.asList(
                 // Add free text company data
@@ -53,13 +62,25 @@ public class MustangTestLineItemNotes {
                 .setProduct(new Product("Datenbank Design", "DB Design - MS SQL 2026", "HUR", BigDecimal.valueOf(20.0)))
                 .setPrice(BigDecimal.valueOf(125.0))
                 .setQuantity(BigDecimal.valueOf(8.0));
-        item.addNote("DB Design nach Vorgabe des Kunden inkl.");
+        item.addNote("DB Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.");
         inv.addItem(item);
 
         item = new Item()
-                .setProduct(new Product("Dokumentation", "Erstellen einer Kurzdokumentation für die ausgeführten Tätigkeiten", "HUR", BigDecimal.valueOf(20.0)))
+                .setProduct(new Product("Dokumentation", "Erstellen einer Kurzdokumentation für die ausgeführten Tätigkeiten.", "HUR", BigDecimal.valueOf(20.0)))
                 .setPrice(BigDecimal.valueOf(95.0))
                 .setQuantity(BigDecimal.valueOf(2.5));
+
+        //
+        // Charge reason code (UNCL7161)
+        // Source: https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7161/
+        //
+        item.addAllowance(new Charge(new BigDecimal("0.99"))
+                //.setTaxPercent(new BigDecimal("0"))
+                .setReason("Allowance reason text for DAP.")
+                .setReasonCode("DAP") // Needs to be one of the above reason codes.
+        //.setCategoryCode("A")
+        );
+
         List<IncludedNote> lineItemNotes = Arrays.asList(
                 new IncludedNote("AAB-CONTENT-LINE", SubjectCode.AAB),
                 new IncludedNote("AAB-CONTENT-LINE#2", SubjectCode.AAB),
@@ -70,7 +91,7 @@ public class MustangTestLineItemNotes {
         item.addNote("CONTENT-LINE-NO-SUBJECTCODE");
         inv.addItem(item);
 
-        String theProfile = "EXTENDED"; // EN16931
+        String theProfile = "EXTENDED";
 
         ZUGFeRD2PullProvider zf2p = new ZUGFeRD2PullProvider();
         zf2p.setProfile(Profiles.getByName(theProfile));
