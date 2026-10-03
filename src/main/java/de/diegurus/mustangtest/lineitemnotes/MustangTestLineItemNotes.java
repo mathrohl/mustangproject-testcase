@@ -26,6 +26,10 @@ public class MustangTestLineItemNotes {
     //
     // Tested with 
     // * NetBeans IDE 27 / JDK 17 / MustangLib 2.26.0 - o.k.
+    // * NetBeans IDE 27 / JDK 17 / MustangLib 2.25.1-SNAPSHOT - o.k.
+    // * NetBeans IDE 27 / JDK 17 / MustangLib 2.24.0 - * ERROR *
+    //   the MustangLib 2.24.0 does not include the line item notes with
+    //   SubjectCode(s)
     //
     public static void main(String[] args) {
         Invoice inv = new Invoice()
