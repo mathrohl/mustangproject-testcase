@@ -36,6 +36,7 @@ public class MustangTestLineItemNotes {
     //   SubjectCode(s)
     //
     public static void main(String[] args) throws ParseException {
+        BigDecimal salesTaxRate = BigDecimal.valueOf(19.0);        
         String custOrderDocNumber = "EDI-2026-000069";
         ReferencedDocument refDocCustOrder;
         refDocCustOrder = new ReferencedDocument()
@@ -64,6 +65,12 @@ public class MustangTestLineItemNotes {
                 new IncludedNote("SUR-CONTENT-HEADER", SubjectCode.SUR));
         inv.setNotesWithSubjectCode(headerNotes);
 
+        inv.addCharge(new Charge(new BigDecimal("9.00"))
+                .setReason("Manueller Datentansfer auf den Kundenserver.")
+                .setReasonCode("FC")
+                .setTaxRateApplicablePercent(salesTaxRate)
+        );
+
         Item item = new Item()
                 .setProduct(new Product("Datenbank Design", "DB Design - MS SQL 2026", "HUR", BigDecimal.valueOf(20.0)))
                 .setPrice(BigDecimal.valueOf(125.0))
@@ -84,10 +91,9 @@ public class MustangTestLineItemNotes {
         // Source: https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7161/
         //
         item.addAllowance(new Charge(new BigDecimal("0.99"))
-                //.setTaxPercent(new BigDecimal("0"))
                 .setReason("Allowance reason text for DAP.")
                 .setReasonCode("DAP") // Needs to be one of the above reason codes.
-        //.setCategoryCode("A")
+                .setTaxRateApplicablePercent(salesTaxRate)
         );
 
         List<IncludedNote> lineItemNotes = Arrays.asList(
@@ -101,7 +107,6 @@ public class MustangTestLineItemNotes {
         inv.addItem(item);
 
         String theProfile = "EXTENDED";
-
         ZUGFeRD2PullProvider zf2p = new ZUGFeRD2PullProvider();
         zf2p.setProfile(Profiles.getByName(theProfile));
         zf2p.generateXML(inv);
