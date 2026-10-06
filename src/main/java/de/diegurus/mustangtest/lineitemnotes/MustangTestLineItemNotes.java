@@ -36,6 +36,7 @@ public class MustangTestLineItemNotes {
     //   SubjectCode(s)
     //
     public static void main(String[] args) throws ParseException {
+        String salesTaxCategoryCode = "S"; // Standard tax rate        
         BigDecimal salesTaxRate = BigDecimal.valueOf(19.0);        
         String custOrderDocNumber = "EDI-2026-000069";
         ReferencedDocument refDocCustOrder;
@@ -68,11 +69,12 @@ public class MustangTestLineItemNotes {
         inv.addCharge(new Charge(new BigDecimal("9.00"))
                 .setReason("Manueller Datentansfer auf den Kundenserver.")
                 .setReasonCode("FC")
+                .setTaxCategoryCode(salesTaxCategoryCode)
                 .setTaxRateApplicablePercent(salesTaxRate)
         );
 
         Item item = new Item()
-                .setProduct(new Product("Datenbank Design", "DB Design - MS SQL 2026", "HUR", BigDecimal.valueOf(20.0)))
+                .setProduct(new Product("Datenbank Design", "DB Design - MS SQL 2026", "HUR", salesTaxRate))
                 .setPrice(BigDecimal.valueOf(125.0))
                 .setQuantity(BigDecimal.valueOf(8.0));
         item.addNote("DB Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.");
@@ -81,7 +83,7 @@ public class MustangTestLineItemNotes {
         inv.addItem(item);
 
         item = new Item()
-                .setProduct(new Product("Dokumentation", "Erstellen einer Kurzdokumentation für die ausgeführten Tätigkeiten.", "HUR", BigDecimal.valueOf(20.0)))
+                .setProduct(new Product("Dokumentation", "Erstellen einer Kurzdokumentation für die ausgeführten Tätigkeiten.", "HUR", salesTaxRate))
                 .setPrice(BigDecimal.valueOf(95.0))
                 .setQuantity(BigDecimal.valueOf(2.5));
         refDocCustOrder.setLineID("2");
