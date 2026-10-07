@@ -3,6 +3,7 @@
  */
 package de.diegurus.mustangproject.testcase;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -127,29 +128,27 @@ public class MustangProjectTestcase {
         String zfXML = new String(zf2p.getXML(), StandardCharsets.UTF_8);
 
         System.out.println(zfXML);
+
         writeFacturxXml(zfXML);
     }
 
     //
-    // Source - https://stackoverflow.com/a/4714719
-    // Posted by BalusC, modified by community. See post 'Timeline' for change history
-    // Retrieved 2026-10-07, License - CC BY-SA 2.5
-    // URL url = classLoader.getResource("com/example/file.ext");
-    // File file = new File(url.toURI().getPath());
-    // ...
+    // String filename = "Testdata/factur-x.xml
+    // File file = new File(filename);
+    // File absoluteFile = file.getAbsoluteFile();
+    // File absoluteDirectory = absoluteFile.getParentFile();
+    // System.out.println(absoluteDirectory.toString());
     //
     private static void writeFacturxXml(String zfXML) {
         FileOutputStream fos;
-        String filename = "/factur-x.xml";
-        URL url = MustangProjectTestcase.class.getClassLoader().getResource(filename);
+        String filename = "Testdata/factur-x.xml";
+
         try {
-            fos = new FileOutputStream(url.toURI().getPath());
-            fos.write(zfXML.getBytes());
+            fos = new FileOutputStream(filename);
+            fos.write(zfXML.getBytes("UTF8"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
             Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
