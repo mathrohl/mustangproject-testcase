@@ -37,7 +37,7 @@ public class MustangTestLineItemNotes {
     //
     public static void main(String[] args) throws ParseException {
         String salesTaxCategoryCode = "S"; // Standard tax rate        
-        BigDecimal salesTaxRate = BigDecimal.valueOf(19.0);        
+        BigDecimal salesTaxRate = BigDecimal.valueOf(19.0);
         String custOrderDocNumber = "EDI-2026-000069";
         ReferencedDocument refDocCustOrder;
         refDocCustOrder = new ReferencedDocument()
@@ -53,8 +53,13 @@ public class MustangTestLineItemNotes {
         inv.setDueDate(invoicDueDate);
         inv.setSender(new TradeParty("diegurus - zurawski zurawski poppl rohland GbR", "Juister Str. 3", "65199", "Wiesbaden", "DE")
                 .addVATID("DE318445037"));
-        inv.setRecipient(new TradeParty("Musterkunde", "Musterweg 9", "99900", "Musterstadt", "DE")
-                .addVATID("DE772689730"));
+        inv.setRecipient(new TradeParty("Musterkunde AG", "Musterweg 9", "99900", "Musterstadt", "DE")
+                .addVATID("DE772689730")
+                .setGlobalID("3210123450000") // GLN
+                .setGlobalIDScheme("0088"));
+        inv.setDeliveryAddress(new TradeParty("MK AG / IT-Abteilung", "Musterweg 9a", "99900", "Musterstadt", "DE")
+                .setGlobalID("3210123450016") // GLN
+                .setGlobalIDScheme("0088"));
 
         List<IncludedNote> headerNotes = Arrays.asList(
                 // Add free text company data
