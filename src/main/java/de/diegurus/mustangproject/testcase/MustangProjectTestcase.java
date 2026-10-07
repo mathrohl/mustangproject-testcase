@@ -1,7 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-package de.diegurus.mustangtest.lineitemnotes;
+package de.diegurus.mustangproject.testcase;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -25,7 +25,7 @@ import org.mustangproject.ZUGFeRD.ZUGFeRD2PullProvider;
  *
  * @author mro
  */
-public class MustangTestLineItemNotes {
+public class MustangProjectTestcase {
 
     //
     // Tested with 
