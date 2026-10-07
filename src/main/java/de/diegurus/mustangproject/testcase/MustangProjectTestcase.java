@@ -3,13 +3,20 @@
  */
 package de.diegurus.mustangproject.testcase;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.mustangproject.Charge;
 import org.mustangproject.IncludedNote;
 import org.mustangproject.Invoice;
@@ -120,5 +127,30 @@ public class MustangProjectTestcase {
         String zfXML = new String(zf2p.getXML(), StandardCharsets.UTF_8);
 
         System.out.println(zfXML);
+        writeFacturxXml(zfXML);
+    }
+
+    //
+    // Source - https://stackoverflow.com/a/4714719
+    // Posted by BalusC, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-10-07, License - CC BY-SA 2.5
+    // URL url = classLoader.getResource("com/example/file.ext");
+    // File file = new File(url.toURI().getPath());
+    // ...
+    //
+    private static void writeFacturxXml(String zfXML) {
+        FileOutputStream fos;
+        String filename = "/factur-x.xml";
+        URL url = MustangProjectTestcase.class.getClassLoader().getResource(filename);
+        try {
+            fos = new FileOutputStream(url.toURI().getPath());
+            fos.write(zfXML.getBytes());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
