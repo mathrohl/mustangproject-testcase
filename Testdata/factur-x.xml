@@ -11,30 +11,30 @@
     <ram:ID>TestRE-2026-09-0001</ram:ID>
     <ram:TypeCode>380</ram:TypeCode>
     <ram:IssueDateTime>
-      <udt:DateTimeString format="102">20261007</udt:DateTimeString>
+      <udt:DateTimeString format="102">20261008</udt:DateTimeString>
     </ram:IssueDateTime>
     <ram:IncludedNote>
-      <ram:Content>AAB-CONTENT-HEADER</ram:Content>
+      <ram:Content>AAB-CONTENT-HEADER - Mention d'escompte.</ram:Content>
       <ram:SubjectCode>AAB</ram:SubjectCode>
     </ram:IncludedNote>
     <ram:IncludedNote>
-      <ram:Content>AAI-CONTENT-HEADER</ram:Content>
+      <ram:Content>AAI-CONTENT-HEADER - Information générale.</ram:Content>
       <ram:SubjectCode>AAI</ram:SubjectCode>
     </ram:IncludedNote>
     <ram:IncludedNote>
-      <ram:Content>PMD-CONTENT-HEADER</ram:Content>
+      <ram:Content>PMD-CONTENT-HEADER - Informations de règlement.</ram:Content>
       <ram:SubjectCode>PMD</ram:SubjectCode>
     </ram:IncludedNote>
     <ram:IncludedNote>
-      <ram:Content>PMT-CONTENT-HEADER</ram:Content>
+      <ram:Content>PMT-CONTENT-HEADER - Mention de l’indemnité forfaitaire de 40 € pour frais de recouvrement.</ram:Content>
       <ram:SubjectCode>PMT</ram:SubjectCode>
     </ram:IncludedNote>
     <ram:IncludedNote>
-      <ram:Content>REG-CONTENT-HEADER</ram:Content>
+      <ram:Content>REG-CONTENT-HEADER - Informations réglementaires.</ram:Content>
       <ram:SubjectCode>REG</ram:SubjectCode>
     </ram:IncludedNote>
     <ram:IncludedNote>
-      <ram:Content>SUR-CONTENT-HEADER</ram:Content>
+      <ram:Content>SUR-CONTENT-HEADER - Remarques fournisseur.</ram:Content>
       <ram:SubjectCode>SUR</ram:SubjectCode>
     </ram:IncludedNote>
   </rsm:ExchangedDocument>
@@ -43,7 +43,7 @@
       <ram:AssociatedDocumentLineDocument>
         <ram:LineID>1</ram:LineID>
         <ram:IncludedNote>
-          <ram:Content>DB Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.</ram:Content>
+          <ram:Content>Datenbank Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.</ram:Content>
         </ram:IncludedNote>
       </ram:AssociatedDocumentLineDocument>
       <ram:SpecifiedTradeProduct>
@@ -68,7 +68,7 @@
         <ram:ApplicableTradeTax>
           <ram:TypeCode>VAT</ram:TypeCode>
           <ram:CategoryCode>S</ram:CategoryCode>
-          <ram:RateApplicablePercent>19.00</ram:RateApplicablePercent>
+          <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
         </ram:ApplicableTradeTax>
         <ram:SpecifiedTradeSettlementLineMonetarySummation>
           <ram:LineTotalAmount>1000.00</ram:LineTotalAmount>
@@ -79,23 +79,23 @@
       <ram:AssociatedDocumentLineDocument>
         <ram:LineID>2</ram:LineID>
         <ram:IncludedNote>
-          <ram:Content>AAB-CONTENT-LINE</ram:Content>
+          <ram:Content>AAB-CONTENT-LINE - Mention d'escompte.</ram:Content>
           <ram:SubjectCode>AAB</ram:SubjectCode>
         </ram:IncludedNote>
         <ram:IncludedNote>
-          <ram:Content>AAB-CONTENT-LINE#2</ram:Content>
+          <ram:Content>AAB-CONTENT-LINE#2 - Mention d'escompte.</ram:Content>
           <ram:SubjectCode>AAB</ram:SubjectCode>
         </ram:IncludedNote>
         <ram:IncludedNote>
-          <ram:Content>AAI-CONTENT-LINE</ram:Content>
+          <ram:Content>AAI-CONTENT-LINE - Information générale.</ram:Content>
           <ram:SubjectCode>AAI</ram:SubjectCode>
         </ram:IncludedNote>
         <ram:IncludedNote>
-          <ram:Content>SUR-CONTENT-LINE</ram:Content>
+          <ram:Content>SUR-CONTENT-LINE - Remarques fournisseur.</ram:Content>
           <ram:SubjectCode>SUR</ram:SubjectCode>
         </ram:IncludedNote>
         <ram:IncludedNote>
-          <ram:Content>CONTENT-LINE-NO-SUBJECTCODE</ram:Content>
+          <ram:Content>CONTENT-LINE-NO-SUBJECTCODE - Free text may appear only once.</ram:Content>
         </ram:IncludedNote>
       </ram:AssociatedDocumentLineDocument>
       <ram:SpecifiedTradeProduct>
@@ -120,7 +120,7 @@
         <ram:ApplicableTradeTax>
           <ram:TypeCode>VAT</ram:TypeCode>
           <ram:CategoryCode>S</ram:CategoryCode>
-          <ram:RateApplicablePercent>19.00</ram:RateApplicablePercent>
+          <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
         </ram:ApplicableTradeTax>
         <ram:SpecifiedTradeAllowanceCharge>
           <ram:ChargeIndicator>
@@ -175,18 +175,18 @@
       </ram:ShipToTradeParty>
       <ram:ActualDeliverySupplyChainEvent>
         <ram:OccurrenceDateTime>
-          <udt:DateTimeString format="102">20261007</udt:DateTimeString>
+          <udt:DateTimeString format="102">20261008</udt:DateTimeString>
         </ram:OccurrenceDateTime>
       </ram:ActualDeliverySupplyChainEvent>
     </ram:ApplicableHeaderTradeDelivery>
     <ram:ApplicableHeaderTradeSettlement>
       <ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
       <ram:ApplicableTradeTax>
-        <ram:CalculatedAmount>236.65</ram:CalculatedAmount>
+        <ram:CalculatedAmount>249.10</ram:CalculatedAmount>
         <ram:TypeCode>VAT</ram:TypeCode>
         <ram:BasisAmount>1245.51</ram:BasisAmount>
         <ram:CategoryCode>S</ram:CategoryCode>
-        <ram:RateApplicablePercent>19.00</ram:RateApplicablePercent>
+        <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
       </ram:ApplicableTradeTax>
       <ram:SpecifiedTradeAllowanceCharge>
         <ram:ChargeIndicator>
@@ -198,7 +198,7 @@
         <ram:CategoryTradeTax>
           <ram:TypeCode>VAT</ram:TypeCode>
           <ram:CategoryCode>S</ram:CategoryCode>
-          <ram:RateApplicablePercent>19.00</ram:RateApplicablePercent>
+          <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
         </ram:CategoryTradeTax>
       </ram:SpecifiedTradeAllowanceCharge>
       <ram:SpecifiedTradePaymentTerms>
@@ -212,10 +212,10 @@
         <ram:ChargeTotalAmount>9.00</ram:ChargeTotalAmount>
         <ram:AllowanceTotalAmount>0.00</ram:AllowanceTotalAmount>
         <ram:TaxBasisTotalAmount>1245.51</ram:TaxBasisTotalAmount>
-        <ram:TaxTotalAmount currencyID="EUR">236.65</ram:TaxTotalAmount>
-        <ram:GrandTotalAmount>1482.16</ram:GrandTotalAmount>
+        <ram:TaxTotalAmount currencyID="EUR">249.10</ram:TaxTotalAmount>
+        <ram:GrandTotalAmount>1494.61</ram:GrandTotalAmount>
         <ram:TotalPrepaidAmount>0.00</ram:TotalPrepaidAmount>
-        <ram:DuePayableAmount>1482.16</ram:DuePayableAmount>
+        <ram:DuePayableAmount>1494.61</ram:DuePayableAmount>
       </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
     </ram:ApplicableHeaderTradeSettlement>
   </rsm:SupplyChainTradeTransaction>

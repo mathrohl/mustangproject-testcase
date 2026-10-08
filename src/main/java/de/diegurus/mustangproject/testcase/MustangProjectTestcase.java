@@ -33,19 +33,19 @@ import org.mustangproject.ZUGFeRD.ZUGFeRD2PullProvider;
  *
  * @author mro
  */
+//
+// This has been tested with 
+// * NetBeans IDE 25 & 27 / JDK 17 / MustangLib 2.26.0 - o.k.
+// * NetBeans IDE 27 / JDK 17 / MustangLib 2.25.1-SNAPSHOT - o.k.
+// * NetBeans IDE 27 / JDK 17 / MustangLib 2.24.0 - * ERROR *
+//   MustangLib 2.24.0 silently does not include the line item notes with
+//   SubjectCode(s)
+//
 public class MustangProjectTestcase {
 
-    //
-    // Tested with 
-    // * NetBeans IDE 27 / JDK 17 / MustangLib 2.26.0 - o.k.
-    // * NetBeans IDE 27 / JDK 17 / MustangLib 2.25.1-SNAPSHOT - o.k.
-    // * NetBeans IDE 27 / JDK 17 / MustangLib 2.24.0 - * ERROR *
-    //   the MustangLib 2.24.0 does not include the line item notes with
-    //   SubjectCode(s)
-    //
     public static void main(String[] args) throws ParseException {
         String salesTaxCategoryCode = "S"; // Standard tax rate        
-        BigDecimal salesTaxRate = BigDecimal.valueOf(19.0);
+        BigDecimal salesTaxRate = BigDecimal.valueOf(20.0); // French VAT rate applies
         String custOrderDocNumber = "EDI-2026-000069";
         ReferencedDocument refDocCustOrder;
         refDocCustOrder = new ReferencedDocument()
@@ -71,12 +71,12 @@ public class MustangProjectTestcase {
 
         List<IncludedNote> headerNotes = Arrays.asList(
                 // Add free text company data
-                new IncludedNote("AAB-CONTENT-HEADER", SubjectCode.AAB),
-                new IncludedNote("AAI-CONTENT-HEADER", SubjectCode.AAI),
-                new IncludedNote("PMD-CONTENT-HEADER", SubjectCode.PMD),
-                new IncludedNote("PMT-CONTENT-HEADER", SubjectCode.PMT),
-                new IncludedNote("REG-CONTENT-HEADER", SubjectCode.REG),
-                new IncludedNote("SUR-CONTENT-HEADER", SubjectCode.SUR));
+                new IncludedNote("AAB-CONTENT-HEADER - Mention d'escompte.", SubjectCode.AAB),
+                new IncludedNote("AAI-CONTENT-HEADER - Information générale.", SubjectCode.AAI),
+                new IncludedNote("PMD-CONTENT-HEADER - Informations de règlement.", SubjectCode.PMD),
+                new IncludedNote("PMT-CONTENT-HEADER - Mention de l’indemnité forfaitaire de 40 € pour frais de recouvrement.", SubjectCode.PMT),
+                new IncludedNote("REG-CONTENT-HEADER - Informations réglementaires.", SubjectCode.REG),
+                new IncludedNote("SUR-CONTENT-HEADER - Remarques fournisseur.", SubjectCode.SUR));
         inv.setNotesWithSubjectCode(headerNotes);
 
         inv.addCharge(new Charge(new BigDecimal("9.00"))
@@ -90,7 +90,7 @@ public class MustangProjectTestcase {
                 .setProduct(new Product("Datenbank Design", "DB Design - MS SQL 2026", "HUR", salesTaxRate))
                 .setPrice(BigDecimal.valueOf(125.0))
                 .setQuantity(BigDecimal.valueOf(8.0));
-        item.addNote("DB Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.");
+        item.addNote("Datenbank Design nach Vorgabe des Kunden mit von diesem zur Vefügung gestellten Testdaten.");
         refDocCustOrder.setLineID("1");
         item.setBuyerOrderReferencedDocument(refDocCustOrder);
         inv.addItem(item);
@@ -112,13 +112,13 @@ public class MustangProjectTestcase {
         );
 
         List<IncludedNote> lineItemNotes = Arrays.asList(
-                new IncludedNote("AAB-CONTENT-LINE", SubjectCode.AAB),
-                new IncludedNote("AAB-CONTENT-LINE#2", SubjectCode.AAB),
-                new IncludedNote("AAI-CONTENT-LINE", SubjectCode.AAI),
-                new IncludedNote("SUR-CONTENT-LINE", SubjectCode.SUR)
+                new IncludedNote("AAB-CONTENT-LINE - Mention d'escompte.", SubjectCode.AAB),
+                new IncludedNote("AAB-CONTENT-LINE#2 - Mention d'escompte.", SubjectCode.AAB),
+                new IncludedNote("AAI-CONTENT-LINE - Information générale.", SubjectCode.AAI),
+                new IncludedNote("SUR-CONTENT-LINE - Remarques fournisseur.", SubjectCode.SUR)
         );
         item.addNotes(lineItemNotes);
-        item.addNote("CONTENT-LINE-NO-SUBJECTCODE");
+        item.addNote("CONTENT-LINE-NO-SUBJECTCODE - Free text may appear only once.");
         inv.addItem(item);
 
         String theProfile = "EXTENDED";
@@ -150,6 +150,10 @@ public class MustangProjectTestcase {
             Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(MustangProjectTestcase.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            File file = new File(filename);
+            String successMsg = "The XML has been witten as\n" + file.getAbsoluteFile() + "\n";
+            System.out.println(successMsg);
         }
     }
 }
