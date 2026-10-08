@@ -8,8 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -127,6 +125,7 @@ public class MustangProjectTestcase {
         zf2p.generateXML(inv);
         String zfXML = new String(zf2p.getXML(), StandardCharsets.UTF_8);
 
+        System.out.println();
         System.out.println(zfXML);
 
         writeFacturxXml(zfXML);
