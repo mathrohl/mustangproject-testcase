@@ -52,19 +52,20 @@ public class MustangProjectTestcase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
         Invoice inv = new Invoice()
+                .setTestIndicator() // Setting the test indicator seems to be a good idea
                 .setNumber("TestRE-2026-09-0001")
                 .setIssueDate(new Date())
                 .setDeliveryDate(new Date());
         Date invoicDueDate = dateFormat.parse("20991231");
         inv.setDueDate(invoicDueDate);
         inv.setSender(new TradeParty("diegurus - zurawski zurawski poppl rohland GbR", "Juister Str. 3", "65199", "Wiesbaden", "DE")
-                .addVATID("DE318445037"));
+                .addVATID("DE318445037")); // Sample VAT ID
         inv.setRecipient(new TradeParty("Musterkunde AG", "Musterweg 9", "99900", "Musterstadt", "DE")
                 .addVATID("DE772689730")
-                .setGlobalID("3210123450000") // GLN
-                .setGlobalIDScheme("0088"));
+                .setGlobalID("3210123450000") // Sample GLN
+                .setGlobalIDScheme("0088")); // Sample VAT ID
         inv.setDeliveryAddress(new TradeParty("MK AG / IT-Abteilung", "Musterweg 9a", "99900", "Musterstadt", "DE")
-                .setGlobalID("3210123450016") // GLN
+                .setGlobalID("3210123450016") // Sample GLN
                 .setGlobalIDScheme("0088"));
 
         List<IncludedNote> headerNotes = Arrays.asList(
